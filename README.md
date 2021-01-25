@@ -16,7 +16,7 @@ Este script **actualiza los paquetes del sistema** e instala los siguientes **pa
 
 # Modo de uso:
 
-Desde la shell de nuestra máquina Debian en Amazon, como usuario *admin*, teclear lo siguiente:
+Desde la shell de nuestra máquina Debian en Amazon, como usuario **admin**, copiar el siguiente comando y ejecutar:
 
 **wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh**
 
