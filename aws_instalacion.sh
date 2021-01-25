@@ -7,10 +7,12 @@
 #
 # La máquina en Amazon EC2 se crea en 1 minuto.
 # Con este script se instala y configura en 5 minutos 20 segundos de reloj.
+#
 # Modo de uso:
 # Desde la shell de nuestra máquina Debian en Amazon EC2 con el usuario admin, ejecutar el siguiente comando:
 #
-# wget https://informatica.iessanclemente.net/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
+# wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
+#
 
 # Variables globales del Script.
 versionPHP=7.4
