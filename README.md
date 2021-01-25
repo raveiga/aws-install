@@ -1,4 +1,5 @@
-# aws-install
-## Instalación de LEMP (Linux Nginx Mysql y PHPMyadmin) y múltiples dominios virtuales con certificado SSL de LetsEncrypt, en una máquina virtual Debian funcionando en un servidor de Amazon EC2.
+## Instalación de LEMP (Linux Nginx Mysql y PHPMyadmin) en t2.micro EC2 Amazon.
 
-# Programa AWS Educate - IES San Clemente.
+Además se instalarán múltiples dominios virtuales con certificado SSL de LetsEncrypt, en una máquina virtual Debian funcionando en un servidor de Amazon EC2.
+
+IES San Clemente - 2020-2021
