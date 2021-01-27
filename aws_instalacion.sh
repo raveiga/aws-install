@@ -162,7 +162,7 @@ echo -e "\n\tfastcgi_hide_header 'X-Powered-By';" | sudo tee -a /etc/nginx/sites
 echo -e "\n\tlocation / {" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\ttry_files \$uri \$uri/ =404;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\t# Para el dominio de LARAVEL COMENTAR LA LINEA ANTERIOR Y DESCOMENTAR LA SIGUIENTE LINEA:" | sudo tee -a /etc/nginx/sites-available/$dominio
-echo -e "\t\t# try_files \$uri \$uri/ /index.php?query_string;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\t# try_files \$uri \$uri/ /index.php?\$query_string;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t}" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\n\t# Para el dominio de LARAVEL DESCOMENTAR LA SIGUIENTE LINEA:" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t#error_page 404 /index.php;" | sudo tee -a /etc/nginx/sites-available/$dominio
