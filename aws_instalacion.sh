@@ -114,7 +114,7 @@ sudo mysql_secure_installation
 # Instalamos Nginx
 sudo apt install nginx apache2-utils -y
 
-# Activamos server_tokens off y subida de archivos a 25M en /etc/nginx/nginx.conf
+# Activamos server_tokens off en /etc/nginx/nginx.conf
 sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
