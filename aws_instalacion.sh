@@ -34,6 +34,13 @@ read -rsp $'Pulse [ENTER] para continuar o [CTRL+C] para detener la instalación
 sudo sed 's/#export GCC_COLORS/export GCC_COLORS/g' -i /home/admin/.bashrc
 sudo sed "s/#alias ll='ls -l'/alias ll='ls -al'"/g -i /home/admin/.bashrc
 
+# Instalamos lsb_release
+sudo apt install lsb-release
+
+# Añadimos los backports al sources.list
+sudo echo -e "deb http://ftp.debian.org/debian $(lsb_release -c -s)-backports main" >> /etc/apt/sources.list
+sudo echo -e "deb-src http://ftp.debian.org/debian $(lsb_release -c -s)-backports main" >> /etc/apt/sources.list
+
 # Este script es para la instalacion de LEMP en un servidor de Debian Buster recien instalado.
 # Actualizamos repositorio
 echo -e "\nInstalando y actualizando paquetes...\n\n"
