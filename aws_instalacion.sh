@@ -9,7 +9,7 @@
 # Con este script se instala y configura en 5 minutos 20 segundos de reloj.
 #
 # Modo de uso:
-# Desde la shell de nuestra máquina Debian en Amazon EC2 con el usuario admin, ejecutar el siguiente comando:
+# Desde la home de nuestra máquina Debian en Amazon EC2 con el usuario admin: /home/admin, ejecutar el siguiente comando:
 #
 # wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
 #
@@ -31,8 +31,8 @@ echo -e "\n"
 read -rsp $'Pulse [ENTER] para continuar o [CTRL+C] para detener la instalación ...\n'
 
 # Configuramos nuestro entorno para la próxima vez que iniciemos sesión, colores y descomentamos los alias de comando ll, la y l
-sudo sed 's/#export GCC_COLORS/export GCC_COLORS/g' -i /home/admin/.bashrc
-sudo sed "s/#alias ll='ls -l'/alias ll='ls -al'"/g -i /home/admin/.bashrc
+sudo sed 's/#export GCC_COLORS/export GCC_COLORS/g' -i .bashrc
+sudo sed "s/#alias ll='ls -l'/alias ll='ls -al'"/g -i .bashrc
 
 # Instalamos lsb_release
 sudo apt install lsb-release
