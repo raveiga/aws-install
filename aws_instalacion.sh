@@ -54,6 +54,9 @@ sudo apt autoremove -y
 # Ajustamos la fecha y hora correcta de nuestro sistema
 sudo dpkg-reconfigure tzdata
 
+# Reconfiguramos locales
+sudo dpkg-reconfigure locales
+
 # Instalamos los paquetes más comunes
 sudo apt install zip unzip htop -y
 
