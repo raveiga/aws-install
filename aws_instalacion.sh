@@ -321,5 +321,5 @@ echo -e "\n\n                         Y ya puedes probar a conectarte con tu nav
 echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"admin\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"phpmyadmin\" y la contraseña que hayas puesto."
 echo -e "\n\n                                                  ! GRACIAS !"
-echo -e "\n\n                                                R.V. 2020-2021"
+echo -e "\n\n                                                Rafa Veiga 2020-2021"
 echo -e "\n========================================================================================================================\n\n\n"
