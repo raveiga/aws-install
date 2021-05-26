@@ -183,6 +183,10 @@ echo -e "\t#error_page 404 /index.php;" | sudo tee -a /etc/nginx/sites-available
 echo -e "\n\tlocation ~ \\.php\$ {" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\tfastcgi_pass unix:/var/run/php/php$versionPHP-fpm.sock;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\tfastcgi_index index.php;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\t#Para una instalación normal que no sea de LARAVEL descomentar las 2 líneas siguientes:" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\t#fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\t#fastcgi_param SCRIPT_NAME  \$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\n\t\t#Para LARAVEL descomentar la siguiente línea y comentar las 2 anteriores:" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\tfastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\tinclude fastcgi_params;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t}" | sudo tee -a /etc/nginx/sites-available/$dominio
