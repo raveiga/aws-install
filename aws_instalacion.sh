@@ -113,6 +113,7 @@ sudo apt install mariadb-server mariadb-client -y
 
 # Securizando MariaDB
 clear
+echo
 echo ==============================================================
 echo -e "\nMariaDB/MySQL ya está instalado. Vamos a securizarlo"
 echo Asegúrese de poner una contraseña del root de MySQL
@@ -139,6 +140,7 @@ sudo apt install certbot python3-certbot-nginx -y
 
 # Creamos los dominios Virtuales
 clear
+echo
 echo ===========================================================
 echo -e "\n    Vamos a crear DOMINIOS Virtuales en NGINX\n"
 echo ===========================================================
@@ -157,11 +159,12 @@ else
 
 # Creamos las carpetas correspondientes al nuevo dominio
 sudo mkdir -p /var/www/$dominio/public
-echo -e "\n\n---- Añadimos el siguiente contenido a la página index.php de ejemplo del dominio: \"$dominio\"."
+echo -e "Si usted desea configurar el dominio $dominio para su uso con LARAVEL"
+echo -e "Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio y descomentar/comentar las líneas indicadas."
 echo -e "\n"
+echo -e "\n\nAñadimos el siguiente contenido de ejemplo, a la página index.php del dominio: \"$dominio\"."
 echo -e "<?php\necho \"<center><h2>Dominio funcionando correctamente<br/><br/> $dominio</h2></center>\";" | sudo tee /var/www/$dominio/public/index.php
 sudo chown admin:www-data /var/www/$dominio -R
-
 echo -e "\n---- Añadimos la siguiente configuración para el dominio virtual \"$dominio\"\n"
 echo "server {" | sudo tee /etc/nginx/sites-available/$dominio
 echo -e "\tlisten 80;" | sudo tee -a /etc/nginx/sites-available/$dominio
@@ -215,6 +218,7 @@ clear
 # Ahora vamos a configurar los certificados para los dominios creados.
 # Pero antes de nada hay que revisar que tengamos en dynu.com bien puestas las direcciones IP.
 
+clear
 echo -e "\n\n"
 echo =================================================================================================
 echo -e "\n                                      !! IMPORTANTE !! "
@@ -238,6 +242,7 @@ echo -e "\n"
 sudo certbot
 
 # Ahora vamos a instalar phpmyadmin en el servidor que nos solicite:
+clear
 echo -e "\n\n"
 echo =========================================================================================================
 echo -e "\n                                   Instalación de PHPMyAdmin"
@@ -266,7 +271,8 @@ sudo service mysql restart
 clear
 
 echo -e "\n\n\n=========================================================================\n"
-echo -e "Escribe a continuación la contraseña para el usuario \"admin\",\n\nasí protegeremos el acceso a PHPMyAdmin desde la URL /dbgestion.\n\n[Enter] para no proteger la instalación de PHPMyAdmin:"
+echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion"
+echo -e "Escribe a continuación la contraseña para la autenticación con usuario \"admin\".\n\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin."
 echo -e "\n=========================================================================\n"
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
 read -r autenticacion
