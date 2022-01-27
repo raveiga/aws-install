@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Version: 1.0
+# Version: 1.1
 # Script programado por Rafa Veiga.
 # Curso DAW2 - DWCS. 2020-2021.
 # Script específico para máquina Debian-buster alfons con la imagen Community AMI en EC2 de Amazon.
@@ -132,8 +132,8 @@ sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
 sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
 
-# Ponemos permisos a admin:www-data a la carpeta /var/www
-sudo chown admin:www-data /var/www -R
+# Ponemos los permisos a /var/www del usuario_conectado:www-data
+sudo chown $USER:www-data /var/www -R
 
 # Instalamos certbot para Nginx
 sudo apt install certbot python3-certbot-nginx -y
@@ -164,7 +164,7 @@ echo -e "Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio
 echo -e "\n"
 echo -e "\n\nAñadimos el siguiente contenido de ejemplo, a la página index.php del dominio: \"$dominio\"."
 echo -e "<?php\necho \"<center><h2>Dominio funcionando correctamente<br/><br/> $dominio</h2></center>\";" | sudo tee /var/www/$dominio/public/index.php
-sudo chown admin:www-data /var/www/$dominio -R
+sudo chown $USER:www-data /var/www/$dominio -R
 echo -e "\n---- Añadimos la siguiente configuración para el dominio virtual \"$dominio\"\n"
 echo "server {" | sudo tee /etc/nginx/sites-available/$dominio
 echo -e "\tlisten 80;" | sudo tee -a /etc/nginx/sites-available/$dominio
@@ -254,7 +254,7 @@ echo ===========================================================================
 echo
 read -rsp $'Pulse [ENTER] para continuar.\n'
 
-sudo apt -t buster-backports install php-twig -y
+sudo apt install php-twig -y
 sudo apt install phpmyadmin -y
 
 # Arreglamos el problema con el PHPMyAdmin y MariaDB
@@ -326,5 +326,5 @@ echo -e "\n\n                         Y ya puedes probar a conectarte con tu nav
 echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"admin\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"phpmyadmin\" y la contraseña que hayas puesto."
 echo -e "\n\n                                                  ! GRACIAS !"
-echo -e "\n\n                                             Rafa Veiga 2020-2021"
+echo -e "\n\n                                             Rafa Veiga 2021-2022"
 echo -e "\n========================================================================================================================\n\n\n"
