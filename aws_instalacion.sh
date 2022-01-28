@@ -2,7 +2,7 @@
 #
 # Version: 1.1
 # Script programado por Rafa Veiga.
-# Curso DAW2 - DWCS. 2020-2021.
+# Curso DAW2 - DWCS. 2021-2022.
 # Script específico para máquina Debian-buster alfons con la imagen Community AMI en EC2 de Amazon.
 #
 # La máquina en Amazon EC2 se crea en 1 minuto.
@@ -36,6 +36,9 @@ sudo sed "s/#alias ll='ls -l'/alias ll='ls -al'"/g -i .bashrc
 
 # Instalamos lsb_release
 sudo apt install lsb-release
+# lsb_release -i Debian
+# lsb_release -i
+
 
 # Añadimos los backports al sources.list
 sudo echo -e "deb http://ftp.debian.org/debian $(lsb_release -c -s)-backports main" >> /etc/apt/sources.list
