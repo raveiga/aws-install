@@ -14,7 +14,6 @@
 #
 
 # Variables globales del Script.
-
 ########################################################################################################
 # VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
 versionPHP=8.1
