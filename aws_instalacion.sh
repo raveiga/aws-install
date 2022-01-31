@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 #
-# Version: 1.1
+# Version: 1.2
 # Script programado por Rafa Veiga.
 # Curso DAW2 - DWCS. 2021-2022.
-# Script específico para máquina Debian-buster alfons con la imagen Community AMI en EC2 de Amazon.
+# Script específico para máquina con distribución Debian.
 #
-# La máquina en Amazon EC2 se crea en 1 minuto.
 # Con este script se instala y configura en 5 minutos 20 segundos de reloj.
 #
 # Modo de uso:
@@ -15,16 +14,23 @@
 #
 
 # Variables globales del Script.
-versionPHP=7.4
+
+########################################################################################################
+# VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
+versionPHP=8.1
+
+# VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
+versionNode=17
+#########################################################################################################
 
 clear
 echo =========================================================================================================================
-echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR AMAZON AWS CON DEBIAN"
+echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR VIRTUALIZADO CON DEBIAN"
 echo -e "\n     Se instalarán NGINX, MariaDB, PHP $versionPHP, PHPMyadmin y los dominios virtuales que desee."
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
-echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2021\n"
+echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2021-2022\n"
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
 echo -e "\n"
@@ -33,6 +39,8 @@ read -rsp $'Pulse [ENTER] para continuar o [CTRL+C] para detener la instalación
 # Configuramos nuestro entorno para la próxima vez que iniciemos sesión, colores y descomentamos los alias de comando ll, la y l
 sudo sed 's/#export GCC_COLORS/export GCC_COLORS/g' -i .bashrc
 sudo sed "s/#alias ll='ls -l'/alias ll='ls -al'"/g -i .bashrc
+
+# Solicitamos la versión de PHP que queremos instalar
 
 # Instalamos lsb_release
 sudo apt install lsb-release
@@ -44,7 +52,7 @@ sudo apt install lsb-release
 sudo echo -e "deb http://ftp.debian.org/debian $(lsb_release -c -s)-backports main" >> /etc/apt/sources.list
 sudo echo -e "deb-src http://ftp.debian.org/debian $(lsb_release -c -s)-backports main" >> /etc/apt/sources.list
 
-# Este script es para la instalacion de LEMP en un servidor de Debian Buster recien instalado.
+# Este script es para la instalacion de LEMP en un servidor de Debian recien instalado.
 # Actualizamos repositorio
 echo -e "\nInstalando y actualizando paquetes...\n\n"
 sudo apt update -y
@@ -72,7 +80,16 @@ sudo systemctl disable --now apache2
 sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
 
-# Instalamos PHP-FPM stack en la version indicada por versionPHP al principio del script.
+# Solicitamos la versión de PHP que queremos instalar
+echo -e "\n\n"
+read -p "Introduzca la versión de PHP que desea instalar. Si pulsa ENTER se instalará la versión [$versionPHP]: " entrada
+
+if ! [ -z "$entrada" ]
+then
+      versionPHP=$entrada
+fi
+
+# Instalamos PHP-FPM stack con la version indicada.
 sudo apt install lsb-release apt-transport-https ca-certificates -y
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
@@ -104,7 +121,17 @@ sudo curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
 # Instalamos NodeJS y npm
-sudo curl -sL https://deb.nodesource.com/setup_14.x -o nodesource_setup.sh
+# Solicitamos la versión de NodeJS que queremos instalar
+echo -e "\n\n"
+read -p "\nIntroduzca la versión de NodeJS (16,17,...) que desea instalar. Se instalará la última versión en esa rama 16.x, 17.x etc..\n\n"
+read -p " Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
+
+if ! [ -z "$entrada" ]
+then
+      versionNode=$entrada
+fi
+
+sudo curl -sL https://deb.nodesource.com/setup_$versionNode.x -o nodesource_setup.sh
 sudo bash nodesource_setup.sh
 sudo apt install nodejs -y
 
@@ -135,6 +162,10 @@ sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
 sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
 
+# Configuramos el grupo primario del usuario conectado a www-data
+# Para que cuando hagamos nuevos archivos en la carpeta de /var/www ya tenga los permisos de grupo de www-data.
+sudo usermod -g www-data $USER
+
 # Ponemos los permisos a /var/www del usuario_conectado:www-data
 sudo chown $USER:www-data /var/www -R
 
@@ -152,8 +183,8 @@ echo
 while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]?" && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
-echo -e "\n\nIntroduce el nombre del dominio que quieres crear en Nginx. Ejemplo: laravel.freeddns.org"
-read dominio
+echo "\n\n"
+read -p "Introduce el nombre del dominio que quieres crear en Nginx. Ejemplo: laravel.freeddns.org" dominio
 
 if [ -z "$dominio" ]
 then
@@ -162,12 +193,15 @@ else
 
 # Creamos las carpetas correspondientes al nuevo dominio
 sudo mkdir -p /var/www/$dominio/public
+
 echo -e "Si usted desea configurar el dominio $dominio para su uso con LARAVEL"
 echo -e "Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio y descomentar/comentar las líneas indicadas."
 echo -e "\n"
 echo -e "\n\nAñadimos el siguiente contenido de ejemplo, a la página index.php del dominio: \"$dominio\"."
 echo -e "<?php\necho \"<center><h2>Dominio funcionando correctamente<br/><br/> $dominio</h2></center>\";" | sudo tee /var/www/$dominio/public/index.php
+
 sudo chown $USER:www-data /var/www/$dominio -R
+
 echo -e "\n---- Añadimos la siguiente configuración para el dominio virtual \"$dominio\"\n"
 echo "server {" | sudo tee /etc/nginx/sites-available/$dominio
 echo -e "\tlisten 80;" | sudo tee -a /etc/nginx/sites-available/$dominio
@@ -190,9 +224,9 @@ echo -e "\n\tlocation ~ \\.php\$ {" | sudo tee -a /etc/nginx/sites-available/$do
 echo -e "\t\tfastcgi_pass unix:/var/run/php/php$versionPHP-fpm.sock;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\tfastcgi_index index.php;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t\t#Para una instalación normal que no sea de LARAVEL descomentar la siguiente línea:" | sudo tee -a /etc/nginx/sites-available/$dominio
-echo -e "\t\t#fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\tfastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\n\t\t#Para LARAVEL descomentar la siguiente línea y comentar la línea anterior:" | sudo tee -a /etc/nginx/sites-available/$dominio
-echo -e "\t\tfastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
+echo -e "\t\t#fastcgi_param SCRIPT_FILENAME \$realpath_root\$fastcgi_script_name;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\n\t\tinclude fastcgi_params;" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "\t}" | sudo tee -a /etc/nginx/sites-available/$dominio
 echo -e "}" | sudo tee -a /etc/nginx/sites-available/$dominio
@@ -205,6 +239,21 @@ fi
 ;;
 esac
 done
+
+# Configuramos el servidor web por defecto.
+sudo rm /var/www/html -rf
+mkdir -p /var/www/html/public
+
+# Modificamos el root del servidor por defecto
+sudo sed 's#/www/html#/www/html/public#g' -i /etc/nginx/sites-available/default
+sudo sed 's#index.html#index.php index.html#g' -i /etc/nginx/sites-available/default
+
+# Añadimos la configuración PHP a continuación para el servidor por defecto:
+sudo sed "54 i \\\tlocation ~ \\.php\$ { " -i /etc/nginx/sites-available/default
+sudo sed "55 i \\\t\tfastcgi_pass unix:/var/run/php/php$versionPHP-fpm.sock;" -i /etc/nginx/sites-available/default
+sudo sed "56 i \\\t\tfastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" -i /etc/nginx/sites-available/default
+sudo sed "57 i \\\t\tinclude fastcgi_params;" -i /etc/nginx/sites-available/default
+sudo sed "58 i \\\t}\n" -i /etc/nginx/sites-available/default
 
 # Reiniciamos el servidor NGINX para que lea los nuevos dominios virtuales.
 sudo service nginx restart
@@ -312,12 +361,9 @@ else
         echo -e "\n\tlocation /dbgestion {\n\t\tauth_basic \"Acceso Admin\";\n\t\tauth_basic_user_file /etc/nginx/passwd;\n\t}" | sudo tee temp.txt
         sudo sed "/\error_page 404 \/index.php;/ r temp.txt" -i /etc/nginx/sites-available/$d
         sudo rm temp.txt
-		sudo service nginx restart
+                sudo service nginx restart
     fi
 fi
-
-#Eliminamos el fichero de instalacion:
-sudo rm aws_instalacion.sh
 
 clear
 echo -e "\n\n========================================================================================================================"
@@ -328,6 +374,9 @@ echo -e "\n                  Una vez hechos los cambios en el fichero, REINICIA 
 echo -e "\n\n                         Y ya puedes probar a conectarte con tu navegador a tus dominios virtuales."
 echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"admin\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"phpmyadmin\" y la contraseña que hayas puesto."
+echo -e "\n\n                     Para LARAVEL cuando lo instales acuérdate de aplicar los permisos siguientes a las carpetas: "
+echo -e "\n                                                    sudo chmod -R 775 storage"
+echo -e "\n                                                    sudo chmod -R 775 bootstrap/cache"
 echo -e "\n\n                                                  ! GRACIAS !"
 echo -e "\n\n                                             Rafa Veiga 2021-2022"
 echo -e "\n========================================================================================================================\n\n\n"
