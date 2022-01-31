@@ -8,11 +8,14 @@
 # Con este script se instala y configura en 5 minutos 20 segundos de reloj.
 #
 # Modo de uso:
-# Desde la home de nuestra máquina Debian en Amazon EC2 con el usuario admin: /home/admin, ejecutar el siguiente comando:
+# Primero comprobar si usted tiene instalado sudo:
+# apt install sudo (como root)
+#
+# Desde la home de nuestra máquina Debian con su usuario: ejecutar el siguiente comando:
 #
 # wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
 #
-
+#
 # Variables globales del Script.
 ########################################################################################################
 # VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
