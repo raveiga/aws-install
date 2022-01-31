@@ -69,7 +69,7 @@ sudo dpkg-reconfigure tzdata
 sudo dpkg-reconfigure locales
 
 # Instalamos los paquetes más comunes
-sudo apt install zip unzip htop -y
+sudo apt install zip unzip htop curl -y
 
 # Instalamos Git
 sudo apt install git -y
@@ -122,8 +122,9 @@ sudo mv composer.phar /usr/local/bin/composer
 
 # Instalamos NodeJS y npm
 # Solicitamos la versión de NodeJS que queremos instalar
+clear
 echo -e "\n\n"
-read -p "\nIntroduzca la versión de NodeJS (16,17,...) que desea instalar. Se instalará la última versión en esa rama 16.x, 17.x etc..\n\n"
+echo -e "Introduzca la versión de NodeJS (16,17,...) que desea instalar. Se instalará la última versión en esa rama 16.x, 17.x etc..\n"
 read -p " Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
 
 if ! [ -z "$entrada" ]
