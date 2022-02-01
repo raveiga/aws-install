@@ -244,7 +244,7 @@ sudo mkdir -p /var/www/default/public
 sudo touch /var/www/default/public/index.php
 
 # Modificamos el root del servidor por defecto
-sudo sed 's#/www/html#/www/html/public#g' -i /etc/nginx/sites-available/default
+sudo sed 's#/www/html#/www/default/public#g' -i /etc/nginx/sites-available/default
 sudo sed 's#index.html#index.php index.html#g' -i /etc/nginx/sites-available/default
 
 # Añadimos la configuración PHP a continuación para el servidor por defecto:
@@ -301,7 +301,7 @@ echo -e "\n                                   Instalación de phpMyAdmin"
 echo -e "\n                  NO MARCAR ni Apache2 ni Lighttpd y PULSAR en OK directamente."
 echo -e "\n              Aceptar YES en \"Configure database for phpmyadmin with dbconfig-common\".\n"
 echo -e "\n                       Poner una contraseña para el usuario phpmyadmin.\n"
-echo -e "\n     Para administrar el mysql desde phpmyadmin nos conectaremos con el usuario phpmyadmin.\n"
+echo -e "\n     Para administrar el mysql desde phpmyadmin nos conectaremos con el usuario root.\n"
 echo =========================================================================================================
 echo
 read -rsp $'Pulse [ENTER] para continuar.\n'
@@ -319,6 +319,7 @@ sudo mkdir /etc/phpmyadmin/
 sudo cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
 sudo sed "s/blowfish_secret'] = ''/blowfish_secret'] = 'H2OxcGXxtl39soJwrwVlh6KW6s2rER63i'/g" -i /usr/share/phpmyadmin/config.inc.php
 sudo echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
+sudo rm phpMyAdmin-${VERSION}-all-languages.tar.gz
 
 # Arreglamos el problema con el PHPMyAdmin y MariaDB
 echo -e "use mysql;\n" | sudo tee fix.sql
