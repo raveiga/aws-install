@@ -181,8 +181,8 @@ echo
 while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]? " && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
-echo -e "\n"
-read -p "Introduce el nombre del dominio virtual que has registrado en Dynu.com (por ejemplo: laravel.freeddns.org) y que vas a configurar en Nginx: " dominio
+echo -e "\nPuedes registrar los dominios que tengas en DYNU.COM, por ejemplo: laravel.freeddns.org\n"
+read -p "Teclea el nombre del dominio virtual que quiers configurar en Nginx: " dominio
 
 if [ -z "$dominio" ]
 then
@@ -238,8 +238,8 @@ done
 
 # Configuramos el servidor web por defecto.
 sudo rm /var/www/html -rf
-sudo mkdir -p /var/www/html/public
-sudo touch /var/www/html/public/index.php
+sudo mkdir -p /var/www/default/public
+sudo touch /var/www/default/public/index.php
 
 # Modificamos el root del servidor por defecto
 sudo sed 's#/www/html#/www/html/public#g' -i /etc/nginx/sites-available/default
@@ -305,7 +305,23 @@ echo
 read -rsp $'Pulse [ENTER] para continuar.\n'
 
 sudo apt install php-twig -y
-sudo apt install phpmyadmin -y
+DATA="$(wget https://www.phpmyadmin.net/home_page/version.txt -q -O-)"
+URL="$(echo $DATA | cut -d ' ' -f 3)"
+VERSION="$(echo $DATA | cut -d ' ' -f 1)"
+wget https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
+tar xvf phpMyAdmin-${VERSION}-all-languages.tar.gz
+sudo mv phpMyAdmin-*/ /usr/share/phpmyadmin
+sudo mkdir -p /var/lib/phpmyadmin/tmp
+sudo chown -R www-data:www-data /var/lib/phpmyadmin
+sudo mkdir /etc/phpmyadmin/
+sudo cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
+
+# AQUIIII
+# Modificamos el blowfish_secret con sed
+sudo vim /usr/share/phpmyadmin/config.inc.php
+$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';
+
+#sudo apt install phpmyadmin -y
 
 # Arreglamos el problema con el PHPMyAdmin y MariaDB
 echo -e "use mysql;\n" | sudo tee fix.sql
@@ -322,7 +338,7 @@ clear
 
 echo -e "\n\n\n=========================================================================================\n"
 echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion"
-echo -e "Escribe a continuación la contraseña para la autenticación Basica HTTP con el usuario \"admin\".\n\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin."
+echo -e "\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin.\n\nO escribe a continuación la contraseña para la autenticación Basica HTTP con el usuario \"$usuario\""
 echo -e "\n=============================================================================================\n"
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
 read -r autenticacion
@@ -331,8 +347,8 @@ if [ -z "$autenticacion" ]
 then
       echo "Vale, no protegeremos el directorio /dbgestion."
 else
-    # Creamos el directorio de contraseñas en /etc/nginx/passwd para el usuario admin
-    echo $autenticacion | sudo htpasswd -i -c /etc/nginx/passwd admin
+    # Creamos el directorio de contraseñas en /etc/nginx/passwd para el usuario $usuario
+    echo $autenticacion | sudo htpasswd -i -c /etc/nginx/passwd $usuario
     echo -e "\nHemos creado el fichero /etc/nginx/passwd para el usuario admin y contraseña $autenticacion"
 
     # Pedimos el dominio para hacer el enlace simbólico
