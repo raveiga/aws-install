@@ -23,6 +23,9 @@ versionPHP=7.4
 
 # VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
 versionNode=17
+
+# Usuario conectado
+usuario=$USER
 #########################################################################################################
 
 clear
@@ -121,6 +124,7 @@ sudo curl -sS https://getcomposer.org/installer | php
 sudo mv composer.phar /usr/local/bin/composer
 
 # Instalamos NodeJS y npm
+
 # Solicitamos la versión de NodeJS que queremos instalar
 clear
 echo -e "\n\n"
@@ -177,7 +181,7 @@ echo
 while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]? " && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
-echo "\n\n"
+echo -e "\n"
 read -p "Introduce el nombre del dominio virtual que has registrado en Dynu.com (por ejemplo: laravel.freeddns.org) y que vas a configurar en Nginx: " dominio
 
 if [ -z "$dominio" ]
@@ -247,6 +251,7 @@ sudo sed "55 i \\\t\tfastcgi_pass unix:/var/run/php/php$versionPHP-fpm.sock;" -i
 sudo sed "56 i \\\t\tfastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;" -i /etc/nginx/sites-available/default
 sudo sed "57 i \\\t\tinclude fastcgi_params;" -i /etc/nginx/sites-available/default
 sudo sed "58 i \\\t}\n" -i /etc/nginx/sites-available/default
+sudo sed "60 i \\\t#error_page 404 /index.php;\n" -i /etc/nginx/sites-available/default
 
 # Reiniciamos el servidor NGINX para que lea los nuevos dominios virtuales.
 sudo service nginx restart
@@ -354,16 +359,16 @@ else
         echo -e "\n\tlocation /dbgestion {\n\t\tauth_basic \"Acceso Admin\";\n\t\tauth_basic_user_file /etc/nginx/passwd;\n\t}" | sudo tee temp.txt
         sudo sed "/\error_page 404 \/index.php;/ r temp.txt" -i /etc/nginx/sites-available/$d
         sudo rm temp.txt
-                sudo service nginx restart
+        sudo service nginx restart
     fi
 fi
 
 # Configuramos el grupo primario del usuario conectado a www-data
 # Para que cuando hagamos nuevos archivos en la carpeta de /var/www ya tenga los permisos de grupo de www-data.
-sudo usermod -g www-data $USER
+sudo usermod -g www-data $usuario
 
 # Ponemos los permisos a /var/www del usuario_conectado:www-data
-sudo chown $USER:www-data /var/www * -R
+sudo chown $usuario:www-data /var/www * -R
 
 clear
 echo -e "\n\n========================================================================================================================"
