@@ -19,7 +19,7 @@
 # Variables globales del Script.
 ########################################################################################################
 # VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
-versionPHP=7.4
+versionPHP=8.1
 
 # VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
 versionNode=17
@@ -31,7 +31,7 @@ usuario=$USER
 clear
 echo =========================================================================================================================
 echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR VIRTUALIZADO CON DEBIAN"
-echo -e "\n     Se instalarán NGINX, MariaDB, PHP $versionPHP, PHPMyadmin y los dominios virtuales que desee."
+echo -e "\n     Se instalarán NGINX, MariaDB, PHP $versionPHP, phpMyAdmin y los dominios virtuales que desee."
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
