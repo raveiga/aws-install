@@ -117,7 +117,7 @@ sudo sed 's/;date.default_longitude = 35.2333/date.default_longitude = -8.547323
 sudo sed 's/;date.sunrise_zenith = 90.583333/date.sunrise_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/;date.sunset_zenith = 90.583333/date.sunset_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
-#sudo sed 's/post_max_size = 2M/post_max_size = 32M/g' -i /etc/php/$versionPHP/fpm/php.ini
+#sudo sed 's/post_max_size = 8M/post_max_size = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
 
 # Instalamos Composer
 sudo curl -sS https://getcomposer.org/installer | php
@@ -307,11 +307,13 @@ echo
 read -rsp $'Pulse [ENTER] para continuar.\n'
 
 sudo apt install php-twig -y
+
 DATA="$(wget https://www.phpmyadmin.net/home_page/version.txt -q -O-)"
 URL="$(echo $DATA | cut -d ' ' -f 3)"
 VERSION="$(echo $DATA | cut -d ' ' -f 1)"
 wget https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.gz
 tar xvf phpMyAdmin-${VERSION}-all-languages.tar.gz
+
 sudo mv phpMyAdmin-*/ /usr/share/phpmyadmin
 sudo mkdir -p /var/lib/phpmyadmin/tmp
 sudo chown -R www-data:www-data /var/lib/phpmyadmin
@@ -322,12 +324,12 @@ sudo echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadm
 sudo rm phpMyAdmin-${VERSION}-all-languages.tar.gz
 
 # Arreglamos el problema con el PHPMyAdmin y MariaDB
-echo -e "use mysql;\n" | sudo tee fix.sql
-echo -e "GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;\n" | sudo tee -a fix.sql
-echo -e "FLUSH PRIVILEGES;\n" | sudo tee -a fix.sql
-echo -e "exit\n" | sudo tee -a fix.sql
-sudo mysql -u root < fix.sql
-sudo rm fix.sql
+#echo -e "use mysql;\n" | sudo tee fix.sql
+#echo -e "GRANT ALL PRIVILEGES ON *.* TO 'phpmyadmin'@'localhost' WITH GRANT OPTION;\n" | sudo tee -a fix.sql
+#echo -e "FLUSH PRIVILEGES;\n" | sudo tee -a fix.sql
+#echo -e "exit\n" | sudo tee -a fix.sql
+#sudo mysql -u root < fix.sql
+#sudo rm fix.sql
 
 # Reiniciamos el MySQL.
 echo -e "\nReiniciando MariaDB...\n"
@@ -399,5 +401,5 @@ echo -e "\n\n                                                  ! GRACIAS !"
 echo -e "\n\n                                             Rafa Veiga 2021-2022"
 echo -e "\n========================================================================================================================\n\n\n"
 
-read -rsp $'Pulse [ENTER] para reiniciar el servidor o [CTRL+C] para salir...\n'
+read -rsp $'Pulse [ENTER] para reiniciar el servidor (recomendable) o [CTRL+C] para salir...\n'
 sudo reboot
