@@ -315,13 +315,8 @@ sudo mkdir -p /var/lib/phpmyadmin/tmp
 sudo chown -R www-data:www-data /var/lib/phpmyadmin
 sudo mkdir /etc/phpmyadmin/
 sudo cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
-
-# AQUIIII
-# Modificamos el blowfish_secret con sed
-sudo vim /usr/share/phpmyadmin/config.inc.php
-$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';
-
-#sudo apt install phpmyadmin -y
+sudo sed "s/blowfish_secret'] = ''/blowfish_secret'] = 'H2OxcGXxtl39soJwrwVlh6KW6s2rER63i'/g" -i /usr/share/phpmyadmin/config.inc.php
+sudo echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
 
 # Arreglamos el problema con el PHPMyAdmin y MariaDB
 echo -e "use mysql;\n" | sudo tee fix.sql
