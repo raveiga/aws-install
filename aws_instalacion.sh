@@ -78,6 +78,7 @@ sudo service apache2 stop
 sudo systemctl disable --now apache2
 sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
+clear
 
 # Solicitamos la versión de PHP que queremos instalar
 echo -e "\n\n"
@@ -124,7 +125,7 @@ sudo mv composer.phar /usr/local/bin/composer
 clear
 echo -e "\n\n"
 echo -e "Introduzca la versión de NodeJS (16,17,...) que desea instalar. Se instalará la última versión en esa rama 16.x, 17.x etc..\n"
-read -p " Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
+read -p "Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
 
 if ! [ -z "$entrada" ]
 then
@@ -162,10 +163,6 @@ sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
 sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
 
-# Configuramos el grupo primario del usuario conectado a www-data
-# Para que cuando hagamos nuevos archivos en la carpeta de /var/www ya tenga los permisos de grupo de www-data.
-sudo usermod -g www-data $USER
-
 # Ponemos los permisos a /var/www del usuario_conectado:www-data
 sudo chown $USER:www-data /var/www -R
 
@@ -180,11 +177,11 @@ echo -e "\n    Vamos a crear DOMINIOS Virtuales en NGINX\n"
 echo ===========================================================
 echo
 echo
-while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]?" && [[ $REPLY != n ]]; do
+while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]? " && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
 echo "\n\n"
-read -p "Introduce el nombre del dominio que quieres crear en Nginx. Ejemplo: laravel.freeddns.org" dominio
+read -p "Introduce el nombre del dominio virtual que has registrado en Dynu.com (por ejemplo: laravel.freeddns.org) y que vas a configurar en Nginx: " dominio
 
 if [ -z "$dominio" ]
 then
@@ -277,13 +274,13 @@ echo -e "\n                                      !! IMPORTANTE !! "
 echo -e "             1.-   Antes de continuar tienes que comprobar en tu máquina de Amazon "
 echo -e " que tienes permitido en los grupos de seguridad el acceso por HTTP y HTTPS a tu servidor."
 echo
-echo -e "2.- Comprueba en DYNU.com ( https://www.dynu.com/ ) la dirección IPV4 de tus dominios creados"
-echo -e "              para que apunten a la dirección IP pública de este servidor que es:"
+echo -e "2.- Comprueba en DYNU.com ( https://www.dynu.com/ ) la dirección IPV4 de tus dominios registrados"
+echo -e "              para que apunten a la dirección IP pública de este servidor:\n"
 curl ifconfig.me
 echo -e "\n"
 echo =================================================================================================
 echo -e "\n"
-read -p "Presione [Enter] cuando hayas terminado de revisar tus dominios en DYNU.COM"
+read -p "Presione [Enter] cuando hayas terminado de revisar tus dominios en DYNU.COM "
 echo -e "\n\n"
 echo ====================================================
 echo -e "\nVamos a generar los Certificados SSL con LetsEncrypt...\n"
@@ -322,10 +319,10 @@ echo -e "\nReiniciando MariaDB...\n"
 sudo service mysql restart
 clear
 
-echo -e "\n\n\n=========================================================================\n"
+echo -e "\n\n\n=========================================================================================\n"
 echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion"
-echo -e "Escribe a continuación la contraseña para la autenticación con usuario \"admin\".\n\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin."
-echo -e "\n=========================================================================\n"
+echo -e "Escribe a continuación la contraseña para la autenticación Basica HTTP con el usuario \"admin\".\n\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin."
+echo -e "\n=============================================================================================\n"
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
 read -r autenticacion
 
@@ -365,6 +362,10 @@ else
     fi
 fi
 
+# Configuramos el grupo primario del usuario conectado a www-data
+# Para que cuando hagamos nuevos archivos en la carpeta de /var/www ya tenga los permisos de grupo de www-data.
+sudo usermod -g www-data $USER
+
 clear
 echo -e "\n\n========================================================================================================================"
 echo -e "\n                                      INSTALACIÓN Y CONFIGURACIÓN REALIZADA CON ÉXITO "
@@ -375,8 +376,8 @@ echo -e "\n\n                         Y ya puedes probar a conectarte con tu nav
 echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"admin\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"phpmyadmin\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para LARAVEL cuando lo instales acuérdate de aplicar los permisos siguientes a las carpetas: "
-echo -e "\n                                                    sudo chmod -R 775 storage"
-echo -e "\n                                                    sudo chmod -R 775 bootstrap/cache"
+echo -e "\n                                              sudo chmod -R 775 storage"
+echo -e "\n                                         sudo chmod -R 775 bootstrap/cache"
 echo -e "\n\n                                                  ! GRACIAS !"
 echo -e "\n\n                                             Rafa Veiga 2021-2022"
 echo -e "\n========================================================================================================================\n\n\n"
