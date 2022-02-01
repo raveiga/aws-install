@@ -19,7 +19,7 @@
 # Variables globales del Script.
 ########################################################################################################
 # VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
-versionPHP=8.1
+versionPHP=7.4
 
 # VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
 versionNode=17
