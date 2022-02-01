@@ -272,8 +272,8 @@ clear
 echo -e "\n\n"
 echo =================================================================================================
 echo -e "\n                                      !! IMPORTANTE !! "
-echo -e "             1.-   Antes de continuar tienes que comprobar en tu máquina de Amazon "
-echo -e " que tienes permitido en los grupos de seguridad el acceso por HTTP y HTTPS a tu servidor."
+echo -e "             1.-   Antes de continuar tienes que comprobar en tu servidor "
+echo -e "    que tienes permitido en los grupos de seguridad el acceso por HTTP y HTTPS a tu servidor."
 echo
 echo -e "2.- Comprueba en DYNU.com ( https://www.dynu.com/ ) la dirección IPV4 de tus dominios registrados"
 echo -e "              para que apunten a la dirección IP pública de este servidor:\n"
@@ -368,9 +368,10 @@ fi
 sudo usermod -g www-data $usuario
 
 # Ponemos los permisos a /var/www del usuario_conectado:www-data
-sudo chown $usuario:www-data /var/www * -R
+cd /var/www
+sudo chown $usuario:www-data /var/www -R
+cd
 
-clear
 echo -e "\n\n========================================================================================================================"
 echo -e "\n                                      INSTALACIÓN Y CONFIGURACIÓN REALIZADA CON ÉXITO "
 echo -e "\n\n               Para que funcione correctamente LARAVEL tienes que revisar la configuración de los dominios"
