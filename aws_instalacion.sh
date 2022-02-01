@@ -39,6 +39,7 @@ echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San C
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
 echo -e "\n"
+read -p ""
 read -rsp $'Pulse [ENTER] para continuar o [CTRL+C] para detener la instalación ...\n'
 
 # Configuramos nuestro entorno para la próxima vez que iniciemos sesión, colores y descomentamos los alias de comando ll, la y l
