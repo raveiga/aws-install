@@ -117,7 +117,7 @@ sudo sed 's/;date.default_longitude = 35.2333/date.default_longitude = -8.547323
 sudo sed 's/;date.sunrise_zenith = 90.583333/date.sunrise_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/;date.sunset_zenith = 90.583333/date.sunset_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
-#sudo sed 's/post_max_size = 8M/post_max_size = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
+sudo sed 's/post_max_size = 8M/post_max_size = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
 
 # Instalamos Composer
 sudo curl -sS https://getcomposer.org/installer | php
