@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
 #
-# Version: 1.2
+# Version: 1.3
 # Script programado por Rafa Veiga.
 # Curso DAW2 - DWCS. 2021-2022.
 # Script específico para máquina con distribución Debian.
 #
-# Con este script se instala y configura en 6 minutos.
+# Con este script se instala y configura en 6 minutos todos los servicios.
 #
 # Modo de uso:
 # Primero comprobar si usted tiene instalado sudo:
 # apt install sudo (como root)
 #
-# Desde la home de nuestra máquina Debian con su usuario: ejecutar el siguiente comando:
+# Desde la home de nuestra máquina Debian con su usuario normal, ejecutar el siguiente comando:
 #
-# wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
+# wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
+#
 #
 #
 # Variables globales del Script.
@@ -24,7 +25,7 @@ versionPHP=8.1
 # VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
 versionNode=17
 
-# Usuario conectado
+# Usuario que ejecuta el script
 usuario=$1
 #########################################################################################################
 
