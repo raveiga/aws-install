@@ -298,10 +298,7 @@ clear
 echo -e "\n\n"
 echo =========================================================================================================
 echo -e "\n                                   Instalación de phpMyAdmin"
-echo -e "\n                  NO MARCAR ni Apache2 ni Lighttpd y PULSAR en OK directamente."
-echo -e "\n              Aceptar YES en \"Configure database for phpmyadmin with dbconfig-common\".\n"
-echo -e "\n                       Poner una contraseña para el usuario phpmyadmin.\n"
-echo -e "\n     Para administrar el mysql desde phpmyadmin nos conectaremos con el usuario root.\n"
+echo -e "\n     Para administrar el MySQL desde phpmyadmin nos conectaremos con el usuario root.\n"
 echo =========================================================================================================
 echo
 read -rsp $'Pulse [ENTER] para continuar.\n'
@@ -338,7 +335,7 @@ clear
 
 echo -e "\n\n\n======================================================================================================\n"
 echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion\n"
-read -p "Pulse [Enter] para NO PROTEGER la instalación de PHPMyAdmin, O escriba la contraseña para la autenticación Basica HTTP de \"$usuario\": " autenticacion
+read -p "Pulse [Enter] para NO PROTEGER la instalación de PHPMyAdmin, o escriba la contraseña para la autenticación Basica HTTP del usuario/a \"$usuario\": " autenticacion
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
 
 if [ -z "$autenticacion" ]
