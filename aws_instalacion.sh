@@ -163,9 +163,6 @@ sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
 sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
 
-# Ponemos los permisos a /var/www del usuario_conectado:www-data
-sudo chown $USER:www-data /var/www -R
-
 # Instalamos certbot para Nginx
 sudo apt install certbot python3-certbot-nginx -y
 
@@ -196,8 +193,6 @@ echo -e "Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio
 echo -e "\n"
 echo -e "\n\nAñadimos el siguiente contenido de ejemplo, a la página index.php del dominio: \"$dominio\"."
 echo -e "<?php\necho \"<center><h2>Dominio funcionando correctamente<br/><br/> $dominio</h2></center>\";" | sudo tee /var/www/$dominio/public/index.php
-
-sudo chown $USER:www-data /var/www/$dominio -R
 
 echo -e "\n---- Añadimos la siguiente configuración para el dominio virtual \"$dominio\"\n"
 echo "server {" | sudo tee /etc/nginx/sites-available/$dominio
@@ -239,7 +234,8 @@ done
 
 # Configuramos el servidor web por defecto.
 sudo rm /var/www/html -rf
-mkdir -p /var/www/html/public
+sudo mkdir -p /var/www/html/public
+sudo touch /var/www/html/public/index.php
 
 # Modificamos el root del servidor por defecto
 sudo sed 's#/www/html#/www/html/public#g' -i /etc/nginx/sites-available/default
@@ -366,6 +362,9 @@ fi
 # Para que cuando hagamos nuevos archivos en la carpeta de /var/www ya tenga los permisos de grupo de www-data.
 sudo usermod -g www-data $USER
 
+# Ponemos los permisos a /var/www del usuario_conectado:www-data
+sudo chown $USER:www-data /var/www * -R
+
 clear
 echo -e "\n\n========================================================================================================================"
 echo -e "\n                                      INSTALACIÓN Y CONFIGURACIÓN REALIZADA CON ÉXITO "
@@ -381,3 +380,6 @@ echo -e "\n                                         sudo chmod -R 775 bootstrap/
 echo -e "\n\n                                                  ! GRACIAS !"
 echo -e "\n\n                                             Rafa Veiga 2021-2022"
 echo -e "\n========================================================================================================================\n\n\n"
+
+read -rsp $'Pulse [ENTER] para reiniciar el servidor o [CTRL+C] para salir...\n'
+sudo reboot
