@@ -183,6 +183,7 @@ echo
 while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]? " && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
+echo -e "\n"
 read -p "Teclea el nombre del dominio virtual que quieres configurar en Nginx (ejemplo: laravel.freeddns.org): " dominio
 
 if [ -z "$dominio" ]
@@ -193,8 +194,8 @@ else
 # Creamos las carpetas correspondientes al nuevo dominio
 sudo mkdir -p /var/www/$dominio/public
 
-echo -e "Si usted desea configurar el dominio $dominio para su uso con LARAVEL"
-echo -e "Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio y descomentar/comentar las líneas indicadas."
+echo -e "\n\nSi usted desea configurar el dominio $dominio para su uso con LARAVEL:"
+echo -e "-- Tiene que editar editar el fichero  /etc/nginx/sites-available/$dominio y descomentar/comentar las líneas indicadas."
 echo -e "\n"
 echo -e "\n\nAñadimos el siguiente contenido de ejemplo, a la página index.php del dominio: \"$dominio\"."
 echo -e "<?php\necho \"<center><h2>Dominio funcionando correctamente<br/><br/> $dominio</h2></center>\";" | sudo tee /var/www/$dominio/public/index.php
