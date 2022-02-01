@@ -5,7 +5,7 @@
 # Curso DAW2 - DWCS. 2021-2022.
 # Script específico para máquina con distribución Debian.
 #
-# Con este script se instala y configura en 5 minutos 20 segundos de reloj.
+# Con este script se instala y configura en 6 minutos.
 #
 # Modo de uso:
 # Primero comprobar si usted tiene instalado sudo:
