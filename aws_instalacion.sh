@@ -25,7 +25,7 @@ versionPHP=8.1
 versionNode=17
 
 # Usuario conectado
-usuario=$USER
+usuario=$1
 #########################################################################################################
 
 clear
@@ -182,8 +182,7 @@ echo
 while read -n1 -r -p "Quieres crear o añadir otro dominio virtual a Nginx [s]|[n]? " && [[ $REPLY != n ]]; do
   case $REPLY in
     s)
-echo -e "\nPuedes registrar los dominios que tengas en DYNU.COM, por ejemplo: laravel.freeddns.org\n"
-read -p "Teclea el nombre del dominio virtual que quiers configurar en Nginx: " dominio
+read -p "Teclea el nombre del dominio virtual que quieres configurar en Nginx (ejemplo: laravel.freeddns.org): " dominio
 
 if [ -z "$dominio" ]
 then
@@ -296,7 +295,7 @@ sudo certbot
 clear
 echo -e "\n\n"
 echo =========================================================================================================
-echo -e "\n                                   Instalación de PHPMyAdmin"
+echo -e "\n                                   Instalación de phpMyAdmin"
 echo -e "\n                  NO MARCAR ni Apache2 ni Lighttpd y PULSAR en OK directamente."
 echo -e "\n              Aceptar YES en \"Configure database for phpmyadmin with dbconfig-common\".\n"
 echo -e "\n                       Poner una contraseña para el usuario phpmyadmin.\n"
