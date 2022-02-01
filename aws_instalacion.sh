@@ -333,12 +333,10 @@ echo -e "\nReiniciando MariaDB...\n"
 sudo service mysql restart
 clear
 
-echo -e "\n\n\n=========================================================================================\n"
-echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion"
-echo -e "\nPulsa [Enter] para NO proteger la instalación de PHPMyAdmin.\n\nO escribe a continuación la contraseña para la autenticación Basica HTTP con el usuario \"$usuario\""
-echo -e "\n=============================================================================================\n"
+echo -e "\n\n\n======================================================================================================\n"
+echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion\n"
+read -p "Pulse [Enter] para NO PROTEGER la instalación de PHPMyAdmin, O escriba la contraseña para la autenticación Basica HTTP de \"$usuario\": " autenticacion
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
-read -r autenticacion
 
 if [ -z "$autenticacion" ]
 then
