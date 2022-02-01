@@ -104,7 +104,7 @@ sudo apt autoremove -y
 sudo apt install php$versionPHP-fpm -y
 
 # Instalamos los paquetes adicionales de PHP
-sudo apt install php$versionPHP-{mysql,gmp,curl,intl,mbstring,xmlrpc,gd,xml,cli,zip,bz2} -y
+sudo apt install php$versionPHP-{mysql,gmp,curl,intl,mbstring,xml,xmlrpc,imap,gd,imagick,cli,zip,bz2} -y
 
 # Configuramos PHP para que muestre los errores por pantalla.
 sudo sed 's/display_errors = Off/display_errors = On/g' -i /etc/php/$versionPHP/fpm/php.ini
@@ -116,6 +116,7 @@ sudo sed 's/;date.default_longitude = 35.2333/date.default_longitude = -8.547323
 sudo sed 's/;date.sunrise_zenith = 90.583333/date.sunrise_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/;date.sunset_zenith = 90.583333/date.sunset_zenith = 90.70/g' -i /etc/php/$versionPHP/fpm/php.ini
 sudo sed 's/upload_max_filesize = 2M/upload_max_filesize = 25M/g' -i /etc/php/$versionPHP/fpm/php.ini
+#sudo sed 's/post_max_size = 2M/post_max_size = 32M/g' -i /etc/php/$versionPHP/fpm/php.ini
 
 # Instalamos Composer
 sudo curl -sS https://getcomposer.org/installer | php
