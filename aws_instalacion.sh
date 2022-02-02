@@ -344,7 +344,7 @@ then
 else
     # Creamos el directorio de contraseñas en /etc/nginx/passwd para el usuario $usuario
     echo $autenticacion | sudo htpasswd -i -c /etc/nginx/passwd $usuario
-    echo -e "\nHemos creado el fichero /etc/nginx/passwd para el usuario admin y contraseña $autenticacion"
+    echo -e "\nHemos creado el fichero /etc/nginx/passwd para el usuario $usuario y contraseña $autenticacion"
 
     # Pedimos el dominio para hacer el enlace simbólico
     echo -e "\n¿En qué dominio quiere instalar el acceso a /dbgestion? Pulse [0] para no instalar el enlace simbólico a PHPMyAdmin: \n"
@@ -389,8 +389,8 @@ echo -e "\n\n               Para que funcione correctamente LARAVEL tienes que r
 echo -e "\n   Revisa y edita las configuraciones de tus dominios de LARAVEL con \"sudo nano /etc/nginx/sites-available/xxxxxx...\""
 echo -e "\n                  Una vez hechos los cambios en el fichero, REINICIA NGINX con \"sudo service nginx restart\""
 echo -e "\n\n                         Y ya puedes probar a conectarte con tu navegador a tus dominios virtuales."
-echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"admin\" y la contraseña que hayas puesto."
-echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"phpmyadmin\" y la contraseña que hayas puesto."
+echo -e "\n\n                         Para la url \"/dbgestion\" el usuario es \"$usuario\" y la contraseña que hayas puesto."
+echo -e "\n\n                     Para entrar en \"phpmyadmin\" el usuaro es \"root\" y la contraseña que hayas puesto."
 echo -e "\n\n                     Para LARAVEL cuando lo instales acuérdate de aplicar los permisos siguientes a las carpetas: "
 echo -e "\n                                              sudo chmod -R 775 storage"
 echo -e "\n                                         sudo chmod -R 775 bootstrap/cache"
