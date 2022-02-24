@@ -99,6 +99,14 @@ then
     versionPHP=$versionDetectada
 fi
 
+# Instalamos PHP-FPM stack con la version indicada.
+sudo apt install lsb-release apt-transport-https ca-certificates -y
+sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
+sudo apt update
+sudo apt upgrade -y
+sudo apt autoremove -y
+
 # Solicitamos la versión de PHP que queremos instalar
 echo -e "\n\n"
 read -p "Introduzca la versión de PHP que desea instalar. Si pulsa ENTER se instalará la versión [$versionPHP]: " entrada
@@ -107,14 +115,6 @@ if ! [ -z "$entrada" ]
 then
       versionPHP=$entrada
 fi
-
-# Instalamos PHP-FPM stack con la version indicada.
-sudo apt install lsb-release apt-transport-https ca-certificates -y
-sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
-echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/php.list
-sudo apt update
-sudo apt upgrade -y
-sudo apt autoremove -y
 
 # Instalamos PHP FPM
 sudo apt install php$versionPHP-fpm -y
