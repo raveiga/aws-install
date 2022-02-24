@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# Version: 1.3
+# Version: 1.4
 # Script programado por Rafa Veiga.
-# Curso DAW2 - DWCS. 2021-2022.
+# Curso DAW2 - DWCS. 2020-2022.
 # Script específico para máquina con distribución Debian.
 #
 # Con este script se instala y configura en 6 minutos todos los servicios.
@@ -36,7 +36,7 @@ echo -e "\n     Se instalarán NGINX, MariaDB, PHP $versionPHP, phpMyAdmin y los
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
-echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2021-2022\n"
+echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2022\n"
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
 echo -e "\n"
@@ -335,7 +335,7 @@ clear
 
 echo -e "\n\n\n======================================================================================================\n"
 echo -e "Vamos a proteger la instalación de PHPMyAdmin accesible desde la URL /dbgestion\n"
-read -p "Pulse [Enter] para NO PROTEGER la instalación de PHPMyAdmin, o escriba la contraseña para la autenticación Basica HTTP del usuario/a \"$usuario\": " autenticacion
+read -sp "Pulse [Enter] para NO PROTEGER la instalación de PHPMyAdmin, o escriba la contraseña para la autenticación Basica HTTP del usuario/a \"$usuario\": " autenticacion
 # Con read -s se oculta el texto que se escribe, con -r se muestra.
 
 if [ -z "$autenticacion" ]
@@ -395,7 +395,7 @@ echo -e "\n\n                     Para LARAVEL cuando lo instales acuérdate de 
 echo -e "\n                                              sudo chmod -R 775 storage"
 echo -e "\n                                         sudo chmod -R 775 bootstrap/cache"
 echo -e "\n\n                                                  ! GRACIAS !"
-echo -e "\n\n                                             Rafa Veiga 2021-2022"
+echo -e "\n\n                                             Rafa Veiga 2020-2022"
 echo -e "\n========================================================================================================================\n\n\n"
 
 read -rsp $'Pulse [ENTER] para reiniciar el servidor (recomendable) o [CTRL+C] para salir...\n'
