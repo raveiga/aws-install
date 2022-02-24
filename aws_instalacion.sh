@@ -258,6 +258,7 @@ done
 sudo rm /var/www/html -rf
 sudo mkdir -p /var/www/default/public
 sudo touch /var/www/default/public/index.php
+echo -e "<?php\necho \"<center><h2>Dominio por defecto funcionando correctamente<br/></h2></center>\";" | sudo tee /var/www/default/public/index.php
 
 # Modificamos el root del servidor por defecto
 sudo sed 's#/www/html#/www/default/public#g' -i /etc/nginx/sites-available/default
