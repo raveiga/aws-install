@@ -19,20 +19,20 @@
 #
 # Variables globales del Script.
 ########################################################################################################
-# VersionPHP por defecto que se instalará a no ser que se indique otra versión durante la instalación.
-versionPHP=8.1
-
-# VersionNode por defecto que se instalará a no ser que se indique otra versión durante la instalación.
-versionNode=17
-
 # Usuario que ejecuta el script
 usuario=$1
+
+# Versión de PHP más actual disponible actualmente (se detecta más adelante en el script la versión más moderna si la hubiera.
+versionPHP=8.1
+
+# Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
+versionNode=17
 #########################################################################################################
 
 clear
 echo =========================================================================================================================
 echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR VIRTUALIZADO CON DEBIAN"
-echo -e "\n     Se instalarán NGINX, MariaDB, PHP $versionPHP, phpMyAdmin y los dominios virtuales que desee."
+echo -e "\n     Se instalarán NGINX, MariaDB, PHP, phpMyAdmin y los dominios virtuales que se deseen."
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
@@ -83,6 +83,14 @@ sudo systemctl disable --now apache2
 sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
 clear
+
+# Versión de PHP más alta disponible en el repositorio.
+versionDetectada=`apt-cache policy php | grep Candidato | cut -d ':' -f 3 | cut -d '+' -f 1`
+
+if ! [ -z "$versionDetectada" ]
+then
+    versionPHP=$versionDetectada
+fi
 
 # Solicitamos la versión de PHP que queremos instalar
 echo -e "\n\n"
