@@ -41,8 +41,8 @@ echo -e "\n     Se instalarán NGINX, MariaDB, PHP, phpMyAdmin y los dominios vi
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
-echo -e "\n     Este script está diseñado para instalarse con un usuario normal con privilegios sudo. Si no está seguro/a, pare con CTRL+C esta aplicación y compruebe"
-echo -e "\n     con \"more aws_instalacion.sh\" la información inicial que se encuentra en el script para instalar el comando sudo y asignarle privilegios al usuario/a."
+echo -e "\n     Este script está diseñado para instalarse con un usuario normal con privilegios sudo. Si no está seguro/a, pare con CTRL+C esta aplicación y compruebe con:"
+echo -e "\n     \"more aws_instalacion.sh\" la información inicial que se encuentra en el script para instalar el comando sudo y asignarle privilegios al usuario/a."
 echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2022\n"
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
