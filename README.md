@@ -1,4 +1,4 @@
-## Instalación de LEMP (Linux Nginx Mysql y PHPMyadmin) en t2.micro EC2 Amazon.
+## Instalación de LEMP (Linux Nginx Mysql y PHPMyadmin) en máquina Debian.
 
 Este script **actualiza los paquetes del sistema** e instala los siguientes **paquetes nuevos**:
 * Nginx
@@ -16,7 +16,9 @@ Este script **actualiza los paquetes del sistema** e instala los siguientes **pa
 
 # Modo de uso:
 
-Desde la shell de nuestra máquina Debian en Amazon, como usuario **admin**, copiar el siguiente comando y ejecutar:
+**Atención: Es necesario tener instalado sudo en la máquina Debian: apt install sudo**
+
+Desde la shell de nuestra máquina Debian, como usuario local sin ser root, copiar el siguiente comando y ejecutar:
 
 **wget https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh**
 
@@ -25,4 +27,4 @@ Seguir los pasos indicados.
 Saludos.
 Rafa Veiga.
 
-IES San Clemente - 2020-2021
+IES San Clemente - 2020-2022
