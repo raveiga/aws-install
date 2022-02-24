@@ -13,7 +13,7 @@
 #
 # Como root ejecutamos visudo y vemos si aparece una línea como:
 # MiUsuario  ALL=(ALL:ALL) ALL
-# 
+#
 # Si aparece entonces salimos de root y volvemos a nuestro shell del usuario normal:
 #
 # Desde la home de nuestra máquina Debian con su usuario normal, ejecutar el siguiente comando:
