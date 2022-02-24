@@ -11,6 +11,11 @@
 # Primero comprobar si usted tiene instalado sudo:
 # apt install sudo (como root)
 #
+# Como root ejecutamos visudo y vemos si aparece una línea como:
+# MiUsuario  ALL=(ALL:ALL) ALL
+# 
+# Si aparece entonces salimos de root y volvemos a nuestro shell del usuario normal:
+#
 # Desde la home de nuestra máquina Debian con su usuario normal, ejecutar el siguiente comando:
 #
 # wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
@@ -36,6 +41,8 @@ echo -e "\n     Se instalarán NGINX, MariaDB, PHP, phpMyAdmin y los dominios vi
 echo -e "\n     Más información en:"
 echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virtual_VPS_con_Amazon_EC2_-_Debian_-_AWS_Educate_-_Instalaci%C3%B3n_r%C3%A1pida_y_recomendada"
 echo
+echo -e "\n     Se va a instalar como un usuario normal con comando sudo. Si no está seguro, pare con CTRL+C esta aplicación y compruebe"
+echo -e "\n     con more aws_instalacion.sh la información inicial."
 echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2022\n"
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
