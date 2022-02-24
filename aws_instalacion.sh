@@ -108,6 +108,7 @@ then
 fi
 
 # Solicitamos la versión de PHP que queremos instalar
+clear
 echo -e "\n\n"
 read -p "Introduzca la versión de PHP que desea instalar. Si pulsa ENTER se instalará la versión [$versionPHP]: " entrada
 
