@@ -91,14 +91,6 @@ sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
 clear
 
-# Versión de PHP más alta disponible en el repositorio.
-versionDetectada=`apt-cache policy php | grep Candidato | cut -d ':' -f 3 | cut -d '+' -f 1`
-
-if ! [ -z "$versionDetectada" ]
-then
-    versionPHP=$versionDetectada
-fi
-
 # Instalamos PHP-FPM stack con la version indicada.
 sudo apt install lsb-release apt-transport-https ca-certificates -y
 sudo wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
@@ -106,6 +98,14 @@ echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | sudo tee /et
 sudo apt update
 sudo apt upgrade -y
 sudo apt autoremove -y
+
+# Versión de PHP más alta disponible en el repositorio.
+versionDetectada=`apt-cache policy php | grep Candidato | cut -d ':' -f 3 | cut -d '+' -f 1`
+
+if ! [ -z "$versionDetectada" ]
+then
+    versionPHP=$versionDetectada
+fi
 
 # Solicitamos la versión de PHP que queremos instalar
 echo -e "\n\n"
