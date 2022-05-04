@@ -24,7 +24,7 @@ Como root ejecutar:
 Como root ejecutamos:
 **visudo**
 
-Comprobamos si aparece una línea como la siguiente, dónde MiUsuario es el usuario logueado:
+Comprobamos si aparece una línea como la siguiente, dónde MiUsuario es el usuario logueado. En el caso de que no aparezca la creamos con nuestros datos:
 
 **MiUsuario  ALL=(ALL:ALL) ALL**
 
