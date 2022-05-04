@@ -18,14 +18,14 @@
 #
 # Desde la home de nuestra máquina Debian con su usuario normal, ejecutar el siguiente comando:
 #
-# wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh
+# wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
 #
 #
 #
 # Variables globales del Script.
 ########################################################################################################
 # Usuario que ejecuta el script
-usuario=$USER
+usuario=$1
 
 # Versión de PHP más actual disponible actualmente (se detecta más adelante en el script la versión más moderna si la hubiera.
 versionPHP=8.1
