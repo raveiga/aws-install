@@ -32,7 +32,7 @@ Guardamos el fichero y salimos de root y volvemos a nuestro shell del usuario no
 
 Desde la **shell** de nuestra máquina Debian, como usuario normal sin ser root, copiar el siguiente comando y ejecutar:
 
-**wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh**
+**wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER**
 
 Seguir los pasos indicados.
 
