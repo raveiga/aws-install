@@ -18,8 +18,11 @@
 #
 # Desde la home de nuestra máquina Debian con su usuario normal, ejecutar el siguiente comando:
 #
-# wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
+# Instalación con CURL:
+# curl https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh --output aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
 #
+# Instalación con WGET:
+# wget --no-cache https://raw.githubusercontent.com/raveiga/aws-install/main/aws_instalacion.sh -O aws_instalacion.sh && sudo bash aws_instalacion.sh $USER
 #
 #
 # Variables globales del Script.
