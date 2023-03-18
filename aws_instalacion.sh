@@ -31,7 +31,7 @@ usuario=$1
 versionPHP=8.2
 
 # Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
-versionNode=19.8.1
+versionNode=19
 #########################################################################################################
 
 clear
