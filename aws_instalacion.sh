@@ -91,6 +91,7 @@ sudo service apache2 stop
 sudo systemctl disable --now apache2
 sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 
@@ -111,6 +112,7 @@ then
 fi
 
 # Solicitamos la versión de PHP que queremos instalar
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo -e "\n\n"
@@ -148,6 +150,7 @@ sudo mv composer.phar /usr/local/bin/composer
 # Instalamos NodeJS y npm
 
 # Solicitamos la versión de NodeJS que queremos instalar
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo -e "\n\n"
@@ -170,6 +173,7 @@ sudo rm nodesource_setup.sh
 sudo apt install mariadb-server mariadb-client -y
 
 # Securizando MariaDB
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo
@@ -195,6 +199,7 @@ grep -qc 'client_max_body_size' /etc/nginx/nginx.conf || sudo sed "/server_token
 sudo apt install certbot python3-certbot-nginx -y
 
 # Creamos los dominios Virtuales
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo
@@ -293,6 +298,7 @@ sudo service nginx restart
 
 # Ahora vamos a configurar los certificados para los dominios creados.
 # Pero antes de nada hay que revisar que tengamos en dynu.com bien puestas las direcciones IP.
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo -e "\n\n"
@@ -319,6 +325,7 @@ echo -e "\n"
 sudo certbot
 
 # Ahora vamos a instalar phpmyadmin en el servidor que nos solicite:
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 echo -e "\n\n"
@@ -357,6 +364,7 @@ sudo rm phpMyAdmin-${VERSION}-all-languages.tar.gz
 # Reiniciamos el MySQL.
 echo -e "\nReiniciando MariaDB...\n"
 sudo service mysql restart
+echo -e "\n\n"
 read -p "Pulse ENTER para continuar"
 clear
 
