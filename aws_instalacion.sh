@@ -314,7 +314,7 @@ curl ifconfig.me
 echo -e "\n"
 echo =================================================================================================
 echo -e "\n"
-read -p "Presione [Enter] cuando hayas terminado de revisar el DNS de tus dominios "
+read -p "Presione [Enter] cuando hayas terminado de revisar el DNS de tus dominios."
 echo -e "\n\n"
 echo ====================================================
 echo -e "\nVamos a generar los Certificados SSL con LetsEncrypt...\n"
