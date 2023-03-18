@@ -146,7 +146,7 @@ sudo mv composer.phar /usr/local/bin/composer
 # Solicitamos la versión de NodeJS que queremos instalar
 clear
 echo -e "\n\n"
-echo -e "Introduzca la versión de NodeJS (16,17,...) que desea instalar. Se instalará la última versión en esa rama 16.x, 17.x etc..\n"
+echo -e "Introduzca la versión de NodeJS (17,18,...) que desea instalar. Se instalará la última versión disponible en esa rama 17.x, 18.x etc..\n"
 read -p "Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
 
 if ! [ -z "$entrada" ]
@@ -294,13 +294,14 @@ echo -e "\n                                      !! IMPORTANTE !! "
 echo -e "             1.-   Antes de continuar tienes que comprobar en tu servidor "
 echo -e "    que tienes permitido en los grupos de seguridad el acceso por HTTP y HTTPS a tu servidor."
 echo
-echo -e "2.- Comprueba en DYNU.com ( https://www.dynu.com/ ) la dirección IPV4 de tus dominios registrados"
-echo -e "              para que apunten a la dirección IP pública de este servidor:\n"
+echo -e "2.- Comprueba que tienes registrado un dominio y apuntando a la IP pública de este servidor."
+echo -e "En DYNU.com ( https://www.dynu.com/ ) puedes registrar dominios gratuitos.\n"
+echo -e "Para tu información la IP pública de este servidor es:\n"
 curl ifconfig.me
 echo -e "\n"
 echo =================================================================================================
 echo -e "\n"
-read -p "Presione [Enter] cuando hayas terminado de revisar tus dominios en DYNU.COM "
+read -p "Presione [Enter] cuando hayas terminado de revisar el DNS de tus dominios "
 echo -e "\n\n"
 echo ====================================================
 echo -e "\nVamos a generar los Certificados SSL con LetsEncrypt...\n"
