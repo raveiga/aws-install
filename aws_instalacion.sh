@@ -151,7 +151,7 @@ sudo mv composer.phar /usr/local/bin/composer
 read -p "Pulse ENTER para continuar"
 clear
 echo -e "\n\n"
-echo -e "Introduzca la versión de NodeJS (17,18,...) que desea instalar. Se instalará la última versión disponible en esa rama 17.x, 18.x etc..\n"
+echo -e "Introduzca la versión de NodeJS (18,19,...) que desea instalar. Se instalará la última versión disponible en esa rama 18.x, 19.x etc..\n"
 read -p "Si pulsa ENTER se instalará la última versión disponible de la rama [$versionNode]: " entrada
 
 if ! [ -z "$entrada" ]
@@ -189,7 +189,7 @@ sudo apt install nginx apache2-utils -y
 sudo sed 's/# server_tokens off;/server_tokens off;/g' -i /etc/nginx/nginx.conf
 
 # Insertamos el tamaño de archivos a 25M debajo de server_tokens off
-sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
+grep -qc 'client_max_body_size' /etc/nginx/nginx.conf || sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/nginx.conf
 
 # Instalamos certbot para Nginx
 sudo apt install certbot python3-certbot-nginx -y
@@ -269,6 +269,7 @@ echo -e "<?php\necho \"<center><h2>Dominio por defecto funcionando correctamente
 
 # Modificamos el root del servidor por defecto
 sudo sed 's#/www/html#/www/default/public#g' -i /etc/nginx/sites-available/default
+
 sudo sed 's#index.html#index.php index.html#g' -i /etc/nginx/sites-available/default
 
 # Añadimos la configuración PHP a continuación para el servidor por defecto:
