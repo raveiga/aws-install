@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# Version: 1.4
+# Version: 1.5
 # Script programado por Rafa Veiga.
-# Curso DAW2 - DWCS. 2020-2022.
+# Curso DAW2 - DWCS. 2020-2023.
 # Script específico para máquina con distribución Debian.
 #
 # Con este script se instala y configura en 6 minutos todos los servicios.
@@ -28,10 +28,10 @@
 usuario=$1
 
 # Versión de PHP más actual disponible actualmente (se detecta más adelante en el script la versión más moderna si la hubiera.
-versionPHP=8.1
+versionPHP=8.2
 
 # Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
-versionNode=17
+versionNode=19.8.1
 #########################################################################################################
 
 clear
@@ -43,7 +43,7 @@ echo -e "\n     https://manuais.iessanclemente.net/index.php?title=Servidor_Virt
 echo
 echo -e "\n     Este script está diseñado para instalarse con un usuario normal con privilegios sudo. Si no está seguro/a, pare con CTRL+C esta aplicación y compruebe con:"
 echo -e "\n     \"more aws_instalacion.sh\" la información inicial que se encuentra en el script para instalar el comando sudo y asignarle privilegios al usuario/a."
-echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2022\n"
+echo -e "\n     Programación: Rafa Veiga. - Curso de DAW2 Ordinario - IES San Clemente. 2020-2023\n"
 echo -e "     Licencia: CC-BY-SA Creative Commons.\n"
 echo =========================================================================================================================
 echo -e "\n"
@@ -412,7 +412,7 @@ echo -e "\n\n                     Para LARAVEL cuando lo instales acuérdate de 
 echo -e "\n                                              sudo chmod -R 775 storage"
 echo -e "\n                                         sudo chmod -R 775 bootstrap/cache"
 echo -e "\n\n                                                  ! GRACIAS !"
-echo -e "\n\n                                             Rafa Veiga 2020-2022"
+echo -e "\n\n                                             Rafa Veiga 2020-2023"
 echo -e "\n========================================================================================================================\n\n\n"
 
 read -rsp $'Pulse [ENTER] para reiniciar el servidor (recomendable) o [CTRL+C] para salir...\n'
