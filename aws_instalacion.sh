@@ -33,7 +33,6 @@ versionPHP=8.2
 # Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
 versionNode=19
 #########################################################################################################
-read -p "Pulse ENTER para continuar"
 clear
 echo =========================================================================================================================
 echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR VIRTUALIZADO CON DEBIAN"
