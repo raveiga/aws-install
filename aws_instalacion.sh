@@ -349,7 +349,7 @@ sudo mkdir -p /var/lib/phpmyadmin/tmp
 sudo chown -R www-data:www-data /var/lib/phpmyadmin
 sudo mkdir /etc/phpmyadmin/
 sudo cp /usr/share/phpmyadmin/config.sample.inc.php  /usr/share/phpmyadmin/config.inc.php
-sudo sed "s/blowfish_secret'] = ''/blowfish_secret'] = 'H2OxcGXxtl39soJwrwVlh6KW6s2rER63i'/g" -i /usr/share/phpmyadmin/config.inc.php
+sudo sed "s/blowfish_secret'] = ''/blowfish_secret'] = 'pOjr435K493Lne&Q!cDugr!lSfuAz*OX'/g" -i /usr/share/phpmyadmin/config.inc.php
 sudo echo "\$cfg['TempDir'] = '/var/lib/phpmyadmin/tmp';" >> /usr/share/phpmyadmin/config.inc.php
 sudo rm phpMyAdmin-${VERSION}-all-languages.tar.gz
 
