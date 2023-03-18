@@ -33,7 +33,7 @@ versionPHP=8.2
 # Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
 versionNode=19
 #########################################################################################################
-
+pause
 clear
 echo =========================================================================================================================
 echo -e "\n     SCRIPT DE INSTALACION DE LEMP (Linux Nginx Mysql PHP) EN SERVIDOR VIRTUALIZADO CON DEBIAN"
@@ -89,6 +89,7 @@ sudo service apache2 stop
 sudo systemctl disable --now apache2
 sudo update-rc.d -f apache2 remove
 sudo apt remove apache2 --purge
+pause
 clear
 
 # Instalamos PHP-FPM stack con la version indicada.
@@ -108,6 +109,7 @@ then
 fi
 
 # Solicitamos la versión de PHP que queremos instalar
+pause
 clear
 echo -e "\n\n"
 read -p "Introduzca la versión de PHP que desea instalar. Si pulsa ENTER se instalará la versión [$versionPHP]: " entrada
@@ -144,6 +146,7 @@ sudo mv composer.phar /usr/local/bin/composer
 # Instalamos NodeJS y npm
 
 # Solicitamos la versión de NodeJS que queremos instalar
+pause
 clear
 echo -e "\n\n"
 echo -e "Introduzca la versión de NodeJS (17,18,...) que desea instalar. Se instalará la última versión disponible en esa rama 17.x, 18.x etc..\n"
@@ -165,6 +168,7 @@ sudo rm nodesource_setup.sh
 sudo apt install mariadb-server mariadb-client -y
 
 # Securizando MariaDB
+pause
 clear
 echo
 echo ==============================================================
@@ -189,6 +193,7 @@ sudo sed "/server_tokens off;/a \\\tclient_max_body_size 25M;" -i /etc/nginx/ngi
 sudo apt install certbot python3-certbot-nginx -y
 
 # Creamos los dominios Virtuales
+pause
 clear
 echo
 echo ===========================================================
@@ -274,7 +279,6 @@ sudo sed "60 i \\\t#error_page 404 /index.php;\n" -i /etc/nginx/sites-available/
 
 # Reiniciamos el servidor NGINX para que lea los nuevos dominios virtuales.
 sudo service nginx restart
-clear
 
 # Vamos a generar los certificados SSL con LetsEncrypt
 # Ésto ya no hace falta, por eso lo comento, por que ya lo incluye LetsEncrypt.
@@ -286,7 +290,7 @@ clear
 
 # Ahora vamos a configurar los certificados para los dominios creados.
 # Pero antes de nada hay que revisar que tengamos en dynu.com bien puestas las direcciones IP.
-
+pause
 clear
 echo -e "\n\n"
 echo =================================================================================================
@@ -312,6 +316,7 @@ echo -e "\n"
 sudo certbot
 
 # Ahora vamos a instalar phpmyadmin en el servidor que nos solicite:
+pause
 clear
 echo -e "\n\n"
 echo =========================================================================================================
@@ -349,6 +354,7 @@ sudo rm phpMyAdmin-${VERSION}-all-languages.tar.gz
 # Reiniciamos el MySQL.
 echo -e "\nReiniciando MariaDB...\n"
 sudo service mysql restart
+pause
 clear
 
 echo -e "\n\n\n======================================================================================================\n"
