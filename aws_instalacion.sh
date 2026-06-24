@@ -31,10 +31,10 @@
 usuario=$1
 
 # Versión de PHP más actual disponible actualmente (se detecta más adelante en el script la versión más moderna si la hubiera.
-versionPHP=8.3
+versionPHP=8.4
 
 # Versión de NodeJs, escribir aquí manualmente la versión por defecto que queramos.
-versionNode=20
+versionNode=24
 #########################################################################################################
 clear
 echo =========================================================================================================================
