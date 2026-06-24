@@ -184,7 +184,7 @@ echo -e "\nDónde pone current password for root, teclear ENTER."
 echo -e "Introducir a continuación la contraseña deseada\n"
 echo ==============================================================
 echo
-sudo mysql_secure_installation
+sudo mariadb-secure-installation
 
 # Instalamos Nginx
 sudo apt install nginx apache2-utils -y
